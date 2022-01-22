@@ -1,8 +1,19 @@
-import { updateUser } from "../utils";
-import { useRef } from "react";
+import { getUserByEmail, updateUser } from "../utils";
+import { useRef, useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditFrom = (props) => {
-  const { username, email, password } = props.user;
+  const [user, setUser] = useState({});
+  const params = useParams();
+  const navigate = useNavigate();
+
+
+
+
+  useEffect(() => {
+    getUserByEmail(params.email ).then((user) => {setUser(user)})
+  }, []);
+  
 
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -11,20 +22,22 @@ const EditFrom = (props) => {
   const handelEditForm = (event) => {
     event.preventDefault();
     console.log("edited");
-    const user = {
-      ...props.user,
+    const newUser = {
+      ...user,
       ...{
         username: usernameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
     };
-    updateUser(user);
+    updateUser(newUser);
+    navigate("/users");
   };
 
   return (
     <>
-      <h3>Edit user {username}</h3>
+      <h3>User {params.email}</h3>
+
       <form onSubmit={handelEditForm}>
         <div>
           <label htmlFor="username">Name </label>
@@ -33,7 +46,7 @@ const EditFrom = (props) => {
             type="text"
             name="username"
             id="username"
-            defaultValue={username}
+            defaultValue={user.username}
           />
         </div>
         <div>
@@ -43,7 +56,7 @@ const EditFrom = (props) => {
             type="text"
             name="email"
             id="email"
-            defaultValue={email}
+            defaultValue={user.email}
           />
         </div>
         <div>
@@ -53,10 +66,10 @@ const EditFrom = (props) => {
             type="text"
             name="password"
             id="password"
-            defaultValue={password}
+            defaultValue={user.password}
           />
         </div>
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Edit" /> 
       </form>
     </>
   );

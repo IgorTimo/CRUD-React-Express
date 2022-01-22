@@ -27,7 +27,7 @@ export const addUser = (username, email, password) => {
 };
 
 export const updateUser = (user) => {
-    console.log(user + " updated");
+    console.log(user, " updated");
   
     const requestOptions = {
       method: "PUT",
@@ -62,8 +62,8 @@ export const deleteUser = (userId) => {
   .then(data => console.log(data.msg));
 };
 
-export async function getOneUser(email) {
-  const response = await fetch("/users/" +  email);
+export async function getUserByEmail(email) {
+  const response = await fetch(port + "/users/" +  email);
   const data = await response.json();
   return data.user;
 };

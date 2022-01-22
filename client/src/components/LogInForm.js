@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getOneUser } from "../utils";
+import { getUserByEmail } from "../utils";
 
 const LogInForm = (props) => {
   const emailRef = useRef();
@@ -7,7 +7,7 @@ const LogInForm = (props) => {
 
   const handleLogInForm = (event) => {
     event.preventDefault();
-    getOneUser(emailRef.current.value).then((user) => {
+    getUserByEmail(emailRef.current.value).then((user) => {
       console.log(user);
     });
   };

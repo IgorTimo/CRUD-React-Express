@@ -36,7 +36,7 @@ export class UserController {
     });
 
     User.updateOne({ _id: req.body.user._id }, user)
-      .then(() => res.send({ msg: `Edited ${req.body.user._id}` }))
+      .then(() => res.send({ msg: `Edited ${req.body.user.username}` }))
       .catch((err) => {
         res.status(400).json({ e: err });
       });

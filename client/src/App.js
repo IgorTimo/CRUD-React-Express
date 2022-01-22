@@ -11,11 +11,12 @@ import { getUsers } from "./utils";
 function App() {
   const [users, setUsers] = useState([]);
 
+
   useEffect(() => {
     getUsers()
       .then((users) => setUsers(users))
       .catch((error) => console.error(error));
-  }, [users]);
+  }, []);
 
   return (
     <>
@@ -25,8 +26,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LogInForm />} />
           <Route path="/singup" element={<SingUpForm />} />
-          <Route path="/all_users" element={<ListOfUsers users={users} />} />
-          <Route path="/edit" element={<EditFrom/>} />
+          <Route path="/users" element={<ListOfUsers users={users} />}/>
+          <Route path="/users/:email" element={<EditFrom users = {users} />} />
         </Routes>
       </BrowserRouter>
     </>

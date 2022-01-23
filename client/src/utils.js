@@ -67,3 +67,4 @@ export async function getUserByEmail(email) {
   const data = await response.json();
   return data.user;
 };
+

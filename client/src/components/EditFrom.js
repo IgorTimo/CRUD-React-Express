@@ -7,13 +7,13 @@ const EditFrom = (props) => {
   const params = useParams();
   const navigate = useNavigate();
 
-
-
+  console.log("All users", props.users);
 
   useEffect(() => {
-    getUserByEmail(params.email ).then((user) => {setUser(user)})
+    getUserByEmail(params.email).then((user) => {
+      setUser(user);
+    });
   }, []);
-  
 
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -69,7 +69,7 @@ const EditFrom = (props) => {
             defaultValue={user.password}
           />
         </div>
-        <input type="submit" value="Edit" /> 
+        <input type="submit" value="Edit" />
       </form>
     </>
   );

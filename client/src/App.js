@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EditFrom from "./components/EditFrom";
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -10,13 +10,17 @@ import { getUsers } from "./utils";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [token, setToken] = useState();
 
+console.log("rerendering app")
 
   useEffect(() => {
     getUsers()
       .then((users) => setUsers(users))
       .catch((error) => console.error(error));
   }, []);
+
+
 
   return (
     <>

@@ -28,6 +28,11 @@ export class UserController {
   }
 
   static updateUser(req, res) {
+
+    if(req.body.user.email != req.user.email && req.user.role != "admin"){
+      return res.sendStatus(403);
+    }
+
     const user = User({
       _id: req.body.user._id,
       username: req.body.user.username,

@@ -1,15 +1,20 @@
 import { useRef } from "react";
-import { getUserByEmail } from "../utils";
+import { useNavigate } from "react-router-dom";
+import { logIn } from "../utils";
 
 const LogInForm = (props) => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   const handleLogInForm = (event) => {
     event.preventDefault();
-    getUserByEmail(emailRef.current.value).then((user) => {
-      console.log(user);
-    });
+    logIn(emailRef.current.value, passwordRef.current.value).then(
+      (data) => {
+        props.setToken(data?.token);
+        props.setUser(data?.user);
+      }
+    );
   };
 
   return (
